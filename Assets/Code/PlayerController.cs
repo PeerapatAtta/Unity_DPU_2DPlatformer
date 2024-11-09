@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
-using System.Threading;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    float x, sx;
-    bool ks;
-    Animator am;
-    Rigidbody2D rb;
+    public float speed = 5f;
+    public float jumpForce = 5f;
 
-    // Start is called before the first frame update
+    private float sx;
+    private Animator am;
+    private Rigidbody2D rb;
+    private bool isGrounded;
+
     void Start()
     {
         am = GetComponent<Animator>();
@@ -21,34 +19,51 @@ public class PlayerController : MonoBehaviour
         sx = transform.localScale.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        x = Input.GetAxis("Horizontal");
+        // การเคลื่อนไหวซ้ายขวาด้วยปุ่ม A และ D
+        float x = 0;
+        if (Input.GetKey(KeyCode.A))
+        {
+            x = -1; // ซ้าย
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            x = 1; // ขวา
+        }
+
+        // ตั้งค่าความเร็วให้ตัวละคร
+        rb.velocity = new Vector2(x * speed, rb.velocity.y);
+
+        // อัปเดต Animation
         am.SetFloat("speed", Mathf.Abs(x));
 
-        if (Input.GetButtonDown("Jump"))
+        // กระโดดด้วย Space Bar เมื่ออยู่บนพื้น
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             am.SetBool("jump", true);
-            rb.velocity = new Vector2(rb.velocity.x, 5f);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            isGrounded = false; // ตั้งค่าว่าไม่อยู่บนพื้นเพื่อป้องกันการกระโดดซ้ำ
         }
-        rb.velocity = new Vector2(x * speed, rb.velocity.y);
+
+        // ปรับทิศทางของตัวละครตามการเคลื่อนไหว
         if (x > 0)
         {
             transform.localScale = new Vector3(sx, transform.localScale.y, transform.localScale.z);
         }
-        if (x < 0)
+        else if (x < 0)
         {
             transform.localScale = new Vector3(-sx, transform.localScale.y, transform.localScale.z);
         }
-
     }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
-        am.SetBool("jump", false);
-    }
-    float Abs(float x)
-    {
-        return x >= 0f ? x : -x;
+        if (coll.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            am.SetBool("jump", false);
+            Debug.Log("Player touched the ground");
+        }
     }
 }
