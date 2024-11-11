@@ -1,19 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class CoinController : MonoBehaviour
 {
-    public AudioClip coinSound; // เพิ่มตัวแปรสำหรับเก็บ AudioClip
+    public AudioClip coinSound;
 
-    private Vector3 initialPosition;
-
-    void Start()
+    private void Start()
     {
-        initialPosition = transform.position;
-
         Collider2D c;
         if (!GetComponent<Collider2D>())
         {
@@ -32,23 +27,15 @@ public class CoinController : MonoBehaviour
         GameManager.nScore++;
         txt.text = "Coin Score = " + GameManager.nScore;
 
-        // สร้างวัตถุชั่วคราวเพื่อเล่นเสียงเก็บเหรียญ
+        // เล่นเสียงเก็บเหรียญ
         GameObject audioObject = new GameObject("CoinSound");
         AudioSource audioSource = audioObject.AddComponent<AudioSource>();
         audioSource.clip = coinSound;
         audioSource.Play();
-
-        // ทำลายวัตถุเสียงหลังเสียงเล่นจบ
         Destroy(audioObject, coinSound.length);
 
-        // ซ่อนเหรียญและตั้งเวลา Respawn
+        // ซ่อนเหรียญและแจ้งให้ CoinPool เริ่มการ Respawn หลังจาก 3 วินาที
         gameObject.SetActive(false);
-        Invoke("Respawn", 3f);
-    }
-
-    void Respawn()
-    {
-        transform.position = initialPosition;
-        gameObject.SetActive(true);
+        CoinPool.Instance.RespawnCoinWithDelay(gameObject, 3f);
     }
 }
