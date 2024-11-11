@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI; // เพิ่มการอ้างอิงถึง TextMeshPro
+using UnityEngine.UI;
 
 public class CoinController : MonoBehaviour
 {
+    public AudioClip coinSound; // เพิ่มตัวแปรสำหรับเก็บ AudioClip
+
+    private Vector3 initialPosition;
+
     void Start()
     {
+        initialPosition = transform.position;
+
         Collider2D c;
         if (!GetComponent<Collider2D>())
         {
@@ -22,21 +28,27 @@ public class CoinController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-       Text txt;
-        txt = GameObject.Find("/Canvas/Text").GetComponent<Text>();
+        Text txt = GameObject.Find("/Canvas/Text").GetComponent<Text>();
         GameManager.nScore++;
-        txt.text = "Score = " + GameManager.nScore;
+        txt.text = "Coin Score = " + GameManager.nScore;
 
-        //add sound
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.Play();
+        // สร้างวัตถุชั่วคราวเพื่อเล่นเสียงเก็บเหรียญ
+        GameObject audioObject = new GameObject("CoinSound");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.clip = coinSound;
+        audioSource.Play();
 
-        Destroy(gameObject, 0.5f); // ทำลายเหรียญหลังจากชนกับ Player 0.5 วินาที
+        // ทำลายวัตถุเสียงหลังเสียงเล่นจบ
+        Destroy(audioObject, coinSound.length);
+
+        // ซ่อนเหรียญและตั้งเวลา Respawn
+        gameObject.SetActive(false);
+        Invoke("Respawn", 3f);
     }
 
-
-    void Update()
+    void Respawn()
     {
-
+        transform.position = initialPosition;
+        gameObject.SetActive(true);
     }
 }

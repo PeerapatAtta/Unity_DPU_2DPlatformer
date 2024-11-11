@@ -122,6 +122,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &98944961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98944963}
+  - component: {fileID: 98944962}
+  m_Layer: 0
+  m_Name: Coints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &98944962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98944961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc16a608d0af86f4b862f612630797a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 3513182330333818354, guid: 321c69b7e12640a4f94d2782f8c45e18, type: 3}
+  spawnPositions:
+  - {x: 0, y: 0, z: 0}
+--- !u!4 &98944963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98944961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5634327, y: 1.7929384, z: -0.029051343}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &279384945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8151626891729056457, guid: 321c69b7e12640a4f94d2782f8c45e18, type: 3}
@@ -386,7 +433,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 85
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1828,6 +1875,7 @@ GameObject:
   - component: {fileID: 1630628725}
   - component: {fileID: 1630628724}
   - component: {fileID: 1630628726}
+  - component: {fileID: 1630628727}
   m_Layer: 0
   m_Name: Move
   m_TagString: Ground
@@ -2065,6 +2113,20 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &1630628727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630628722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8d4b8e13306eb4db6a53e1be288336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dirX: 0
+  moveSpeed: 2
 --- !u!1 &1716176089
 GameObject:
   m_ObjectHideFlags: 0
@@ -3084,8 +3146,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 183.177, y: -88.048645}
-  m_SizeDelta: {x: 250.354, y: 80.0973}
+  m_AnchoredPosition: {x: 306, y: -85}
+  m_SizeDelta: {x: 500, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966885984
 MonoBehaviour:
@@ -3120,7 +3182,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score = 0
+  m_Text: Coin Score = 0
 --- !u!222 &1966885985
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3218,6 +3280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 7660981817663000570, guid: 321c69b7e12640a4f94d2782f8c45e18, type: 3}
+      propertyPath: coinSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af2d0d618f6bf3e428f293c5b7dc5f0f, type: 3}
     - target: {fileID: 8151626891729056457, guid: 321c69b7e12640a4f94d2782f8c45e18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.591502
@@ -3275,3 +3341,4 @@ SceneRoots:
   - {fileID: 574613825}
   - {fileID: 1850908351}
   - {fileID: 1132669391}
+  - {fileID: 98944963}

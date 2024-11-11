@@ -17,11 +17,11 @@ public class Move1 : MonoBehaviour
     void Update()
     {
         // ถ้าตำแหน่ง x ของวัตถุมากกว่า 8 ให้เปลี่ยนทิศทางไปทางซ้าย
-        if(transform.position.x > 8f)
+        if(transform.position.x > 4f)
         {
             moveRight = false;
         }
-        if(transform.position.x < -8f)
+        if(transform.position.x < -4f)
         {
             moveRight = true;
         }
