@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
             am.SetBool("jump", false);
-            Debug.Log("Player touched the ground");
+            // Debug.Log("Player touched the ground");
         }
     }
 }

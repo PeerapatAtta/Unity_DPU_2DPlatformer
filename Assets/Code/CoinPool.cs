@@ -9,6 +9,7 @@ public class CoinPool : MonoBehaviour
     public int poolSize = 10;
     public Vector2 spawnAreaMin;
     public Vector2 spawnAreaMax;
+    public GameObject respawnEffectPrefab; // Prefab ของ Particle Effect
 
     private Queue<GameObject> coinPool;
 
@@ -72,12 +73,30 @@ public class CoinPool : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         RespawnCoin(coin);
+        Debug.Log("Playing Particle Effect at: " + coin.transform.position); // ตรวจสอบตำแหน่งและการเรียกใช้งาน
+        PlayRespawnEffect(coin.transform.position); // แสดง Particle Effect หลังจากที่เหรียญ Respawn
     }
 
     public void RespawnCoin(GameObject coin)
     {
         coin.transform.position = GetRandomPosition();
         coin.SetActive(true);
+        // PlayRespawnEffect(coin.transform.position); // เรียกฟังก์ชันแสดงผล Particle Effect
+    }
+
+    private void PlayRespawnEffect(Vector3 position)
+    {
+        if (respawnEffectPrefab != null)
+        {
+            Debug.Log("Instantiating Particle Effect"); // ตรวจสอบว่าฟังก์ชันนี้ถูกเรียกใช้งานหรือไม่
+            // Debug.Log("Playing respawn effect at: " + position); // เพิ่ม Debug เพื่อตรวจสอบตำแหน่ง
+            GameObject effect = Instantiate(respawnEffectPrefab, position, Quaternion.identity); // สร้าง Particle Effect ที่ตำแหน่งที่กำหนด
+            Destroy(effect, 1f); // ทำลาย Particle Effect หลังจาก 1 วินาที
+        }
+        else
+        {
+            Debug.LogError("Respawn effect prefab is not assigned.");
+        }
     }
 
     private Vector3 GetRandomPosition()
