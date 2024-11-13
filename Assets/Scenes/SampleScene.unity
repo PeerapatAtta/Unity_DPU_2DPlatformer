@@ -941,7 +941,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinScore: {fileID: 219152839}
   HP: {fileID: 367556925}
-  nScore: 0
+  playerHPController: {fileID: 693352344}
 --- !u!1 &648708870
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,17 +8,18 @@ public class ScoreController : MonoBehaviour
 {
     public TextMeshProUGUI coinScore;
     public TextMeshProUGUI HP;
-    public int nScore = 0;
+    // public int nScore = 0;
 
     // อ้างอิงถึง PlayerHPController
-    private PlayerHPController playerHPController;
+    // private PlayerHPController playerHPController;
+    public PlayerHPController playerHPController;
 
 
     // Start is called before the first frame update
     void Start()
     {
         // ค้นหา PlayerHPController ใน Scene
-        playerHPController = FindObjectOfType<PlayerHPController>();
+        // playerHPController = FindObjectOfType<PlayerHPController>();
 
     }
 
@@ -26,7 +27,7 @@ public class ScoreController : MonoBehaviour
     void Update()
     {
         coinScore.text = "Coin Score = " + nScore;
-        
+
         // อัปเดต HP ตามค่า currentHP ใน PlayerHPController
         if (playerHPController != null)
         {
