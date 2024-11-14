@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTime: 0
-  maxTime: 30
+  maxTime: 20
   textUITimer: {fileID: 1408759422}
   sceneName: GameOverScene
 --- !u!114 &574613827

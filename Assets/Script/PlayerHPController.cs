@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameManager;
 
 public class PlayerHPController : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class PlayerHPController : MonoBehaviour
     void Die()
     {
         Debug.Log("Character is dead.");
+        nScore = 0;
         // ไปยังหน้าเกมโอเวอร์ หรือฉากที่กำหนดเมื่อ HP หมด
         SceneManager.LoadScene(sceneName);
 

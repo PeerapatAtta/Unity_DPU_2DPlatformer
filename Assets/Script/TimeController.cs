@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameManager;
 
 public class TimeController : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class TimeController : MonoBehaviour
         else
         {
             currentTime = 0;
+            nScore = 0;
 
             // ทำอะไรสักอย่างเมื่อเวลาหมด
             SceneManager.LoadScene(sceneName);
